@@ -877,15 +877,17 @@
 }
 
 .article-page__sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  width: 218px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  width: 100%;
 }
 
 .sidebar-card {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   padding: 12px;
   border-radius: 12px;
   border: 1px solid var(--border);
@@ -936,6 +938,7 @@
 
 .sidebar-card--consultation .sidebar-card__button {
   width: calc(100% - 24px);
+  margin-top: auto;
   margin-inline: 12px;
   padding: 10px 12px;
   border-radius: 8px;
@@ -1039,6 +1042,7 @@
 }
 
 .sidebar-card--author .sidebar-card__button {
+  margin-top: auto;
   padding: 10px 12px;
   border-radius: 8px;
   font-size: 13px;
@@ -1047,9 +1051,12 @@
 
 .sidebar-card--gift {
   position: relative;
-  display: block;
-  height: 230px;
-  margin-top: 20px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr;
+  min-height: 230px;
+  height: 100%;
+  margin-top: 0;
   padding: 0;
   border: none;
   border-radius: 16px;
@@ -1059,27 +1066,27 @@
 }
 
 .sidebar-card__gift-confetti {
-  position: absolute;
-  top: 0;
-  left: 0;
+  grid-row: 1;
+  grid-column: 1;
+  align-self: stretch;
   width: 100%;
-  height: 150px;
+  min-height: 110px;
   background-repeat: no-repeat;
-  background-size: 100% 150px;
+  background-size: 100% auto;
   background-position: top center;
   pointer-events: none;
 }
 
 .sidebar-card__gift-title {
-  position: absolute;
-  top: 0;
-  left: 0;
+  grid-row: 1;
+  grid-column: 1;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  justify-self: center;
   width: 100%;
-  height: 150px;
   margin: 0;
   padding: 0 12px;
   font-size: 18px;
@@ -1087,12 +1094,12 @@
   line-height: 1.2;
   text-align: center;
   color: #fff;
+  pointer-events: none;
 }
 
 .sidebar-card__gift-image {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  grid-row: 2;
+  grid-column: 1;
   z-index: 2;
   display: block;
   width: 100%;
@@ -1124,7 +1131,7 @@
 }
 
 .sidebar-card--product .sidebar-card__price--product {
-  margin: 0 0 16px;
+  margin: 0;
   font-size: 24px;
   font-weight: 700;
   line-height: 1.2;
@@ -1135,6 +1142,7 @@
   display: inline-flex;
   width: auto;
   min-width: 112px;
+  margin-top: auto;
   padding: 10px 24px;
   border-radius: 8px;
   font-size: 13px;
@@ -1337,6 +1345,39 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .article-page__sidebar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .article-page__sidebar > * {
+    min-width: 0;
+  }
+
+  .article-page__sidebar > :nth-child(1) {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .article-page__sidebar > :nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .article-page__sidebar > :nth-child(3) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .article-page__sidebar > :nth-child(4) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}
+
 @media (min-width: 1024px) {
   .header__nav {
     display: flex;
@@ -1401,6 +1442,16 @@
   }
 
   .article-page__sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 218px;
     align-self: start;
+  }
+
+  .sidebar-card--gift {
+    flex: 0 0 auto;
+    height: auto;
+    margin-top: 20px;
   }
 }
