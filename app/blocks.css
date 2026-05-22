@@ -382,11 +382,19 @@
 }
 
 .blog-card__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   padding: 4px 8px;
   border-radius: 999px;
   background-color: rgb(255 255 255 / 0.9);
   font-size: 12px;
   font-weight: 500;
+}
+
+.blog-card__tag-emoji {
+  font-size: 14px;
+  line-height: 1;
 }
 
 .blog-card__body {
@@ -823,11 +831,19 @@
 }
 
 .article-page__tag-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 14px;
   font-weight: 500;
   color: var(--primary);
   text-decoration: none;
   cursor: pointer;
+}
+
+.article-page__tag-emoji {
+  font-size: 16px;
+  line-height: 1;
 }
 
 .article-page__tag-link:hover,

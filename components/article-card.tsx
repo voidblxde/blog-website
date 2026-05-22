@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { getTagLabel } from "@/lib/blog-data"
+import { getTag } from "@/lib/blog-data"
 
 export interface Article {
   id: string
@@ -30,11 +30,20 @@ export function ArticleCard({ article, featured = false }: ArticleCardProps) {
             height={260}
           />
           <div className="blog-card__tags">
-            {article.tags.slice(0, 2).map((tagId) => (
-              <span key={tagId} className="blog-card__tag">
-                {getTagLabel(tagId)}
-              </span>
-            ))}
+            {article.tags.slice(0, 2).map((tagId) => {
+              const tag = getTag(tagId)
+
+              return (
+                <span key={tagId} className="blog-card__tag">
+                  {tag?.emoji && (
+                    <span className="blog-card__tag-emoji" aria-hidden="true">
+                      {tag.emoji}
+                    </span>
+                  )}
+                  {tag?.label ?? tagId}
+                </span>
+              )
+            })}
           </div>
         </div>
       </Link>

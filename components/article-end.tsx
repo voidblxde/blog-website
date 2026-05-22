@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { articleImages, getTagLabel } from "@/lib/blog-data"
+import { articleImages, getTag } from "@/lib/blog-data"
 
 export function ArticleExercise() {
   return (
@@ -23,13 +23,22 @@ interface ArticleTagsProps {
 export function ArticleTags({ tagIds }: ArticleTagsProps) {
   return (
     <ul className="article-page__tags">
-      {tagIds.map((tagId) => (
-        <li key={tagId} className="article-page__tags-item">
-          <Link href="/" className="article-page__tag-link">
-            {getTagLabel(tagId)}
-          </Link>
-        </li>
-      ))}
+      {tagIds.map((tagId) => {
+        const tag = getTag(tagId)
+
+        return (
+          <li key={tagId} className="article-page__tags-item">
+            <Link href="/" className="article-page__tag-link">
+              {tag?.emoji && (
+                <span className="article-page__tag-emoji" aria-hidden="true">
+                  {tag.emoji}
+                </span>
+              )}
+              {tag?.label ?? tagId}
+            </Link>
+          </li>
+        )
+      })}
       <li className="article-page__tags-item">
         <Link href="/" className="article-page__tag-link">
           Упражнения

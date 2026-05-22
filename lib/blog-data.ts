@@ -165,8 +165,12 @@ export function getArticleBySlug(slug: string): Article | undefined {
   return articles.find((article) => article.slug === slug)
 }
 
+export function getTag(tagId: string): Tag | undefined {
+  return tags.find((tag) => tag.id === tagId)
+}
+
 export function getTagLabel(tagId: string): string {
-  return tags.find((tag) => tag.id === tagId)?.label ?? tagId
+  return getTag(tagId)?.label ?? tagId
 }
 
 export function filterArticlesByTag(tagId: string): Article[] {
